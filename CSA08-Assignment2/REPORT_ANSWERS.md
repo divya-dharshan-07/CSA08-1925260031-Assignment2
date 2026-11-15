@@ -132,7 +132,7 @@
 
 ## Q7 – Day-4 Design Challenge: Diagnose, Redesign and Validate (13 Marks)
 ### A. Diagnose the Bottleneck
-- In Q6 (`ways_memo`), although memoisation reduced time complexity from $O(\phi^n)$ to $O(n)$, top-down recursion still creates $n$ nested stack frames and stores $n$ dictionary entries in `@lru_cache`. At $n = 1,000$, stack depth exceeds `sys.getrecursionlimit()` (1000), causing a fatal `RecursionError`.
+- In Q6 (`ways_memo`), memoisation reduces repeated computation to $O(n)$, but top-down recursion still creates a chain of nested calls and stores cached results. At $n = 1,000$, the call depth exceeds the interpreter's recursion limit (1000), raising `RecursionError`.
 ### B. Define the Design Objective
 - Eliminate call-stack depth completely (`0` recursive frames) and reduce auxiliary memory from $O(n)$ to **$O(1)$ constant space** while maintaining $O(n)$ time complexity so inputs up to $n \ge 5,000$ execute without crashing.
 ### C. Design the Revised Solution
