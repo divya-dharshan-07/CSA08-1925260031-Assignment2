@@ -29,22 +29,27 @@
 
 ## Q2 – Loops that Count Attempts (4 Marks)
 ### 1. Loop Design (`while` vs `for` with `range(3)`)
-- **`break`:** Exits the loop immediately when the entered OTP matches, skipping the `else` block.
-- **`continue`:** Skips blank entries (`entry.strip() == ""`) before incrementing the attempt counter.
-- **`pass`:** Acts as a syntactic no-op placeholder where hardware/input polling hooks would sit.
-- **`loop-else`:** Executes **only** if the loop terminates naturally without hitting `break` (i.e., all 3 attempts failed), locking the account for 30 minutes.
+- **`while` loop:** Uses a separate `attempts` counter, so only nonblank OTP entries count toward the three allowed attempts. Blank entries are ignored with `pass` and `continue`.
+- **`for` loop:** Uses `for attempt in range(1, 4)`. An inner `while` skips any blank entries before the next valid OTP is processed, so blank input does not consume one of the three attempts.
+- **`break`:** Exits the verification loop immediately when the correct OTP is entered.
+- **`continue`:** Skips blank entries without comparing them to the OTP or incrementing the valid-attempt counter.
+- **`pass`:** Demonstrates a no-operation statement for an intentionally ignored blank entry in the `while` implementation.
+- **Loop `else`:** Runs only when all three valid OTP attempts are incorrect and the loop finishes normally; it reports that the account is locked. A successful `break` skips the `else` block.
+- **Input exhaustion:** Both loop versions return `NO_INPUT` if the provided entries end before verification or three failed attempts. They never report success merely because the input list ended.
 
-### 2. Why `while` is More Natural & Counter Placement Bug
-- **Why `while`:** `for _ in range(3)` fixes the iteration count to 3 upfront; if the user enters a blank string, `continue` still advances the `for` loop variable, unfairly consuming an attempt. A `while attempts < 3:` loop decouples loop iterations from valid attempts.
-- **Counter Bug:** If `attempts += 1` is placed *before* checking `if entry == "": continue`, blank inputs will count against the user and lock the account prematurely.
+### 2. Why `while` Is More Natural & Counter Placement
+- **Why `while`:** A `while attempts < 3` loop directly represents a limit on valid attempts. The `for range(3)` version can also meet the blank-entry requirement, but it needs an inner loop to skip blanks before processing each counted attempt.
+- **Counter placement:** The valid-attempt counter must be incremented only after checking that the entry is nonblank. Incrementing before the blank check would incorrectly charge the user for an empty submission.
 
 ### 3. Changed Condition (2 Extra Attempts via Security Question)
-- With `while attempts < max_attempts:`, granting 2 extra attempts simply requires updating `max_attempts += 2` once when `attempts == 3` and the security question passes. A `for _ in range(3)` loop cannot dynamically extend its upper bound once started.
+- The bonus implementation starts with three valid attempts. After the third incorrect OTP, a successful security-question check increases `max_attempts` by two exactly once. With the supplied test entries, the correct OTP is accepted on attempt 5.
+- If the input entries run out before verification, the bonus implementation returns `NO_INPUT`; it does not treat missing input as success.
 
 ### 4. Alternative Concept & Complexity Analysis
-- **Recursion:** Passes `attempts_left` and `idx` to recursive calls.
-- **Time Complexity:** $O(a)$ for $a$ attempts in both iterative and recursive designs.
-- **Space Complexity:** $O(1)$ auxiliary memory for `while`/`for` loops vs. $O(a)$ call-stack frames for recursion.
+- **Recursion:** The recursive alternative passes `attempts_left` and the current entry index (`idx`) to each call. Blank entries advance the index without reducing the remaining attempt count.
+- **Time Complexity:** $O(a + b)$, where $a$ is the number of valid OTP attempts (at most 3, or 5 with the bonus) and $b$ is the number of blank entries skipped.
+- **Space Complexity:** Iterative loops use $O(1)$ auxiliary space; the recursive version uses $O(a+b)$ call-stack space in the worst case because each recursive call advances through an entry.
+- **Verified output:** Three incorrect OTPs produce `LOCKED`; a correct OTP after a blank produces `VERIFIED`; exhausted input produces `NO_INPUT`; the security-bonus test verifies on attempt 5; and the recursive test returns `VERIFIED`.
 
 ---
 
@@ -145,8 +150,8 @@
       RETURN prev1
   ```
 ### D. Predict Before Implementing
-- `redesigned_ways_iter` will succeed at $n = 1,000$ and $n = 5,000$ where `original_ways_memo` crashes with `RecursionError`, and will use **>95% less peak memory** at $n = 950$.
+- `redesigned_ways_iter` will succeed at $n = 1,000$ and $n = 5,000$ where `original_ways_memo` raises `RecursionError`. The measured peak allocation for the iterative version at $n = 950$ is expected to be over 95% lower than the peak allocation recorded during the original version's failed run.
 ### E. Implement and Validate
-- Executed in `Q7/q7_solution.py` (results recorded in `Q7/output.txt`). At $n = 950$, `original_ways_memo` allocates ~120 KB+ for cache/frames, whereas `redesigned_ways_iter` uses under 1 KB and scales smoothly to $n = 5,000$ in ~0.0005 seconds.
+- Executed in `Q7/q7_solution.py` (results recorded in `Q7/output.txt`). At $n = 950$, the original memoised implementation raises `RecursionError`; `tracemalloc` records a peak of 166,169 B during that failed run. The iterative redesign completes successfully with a peak of 424 B (about 99.7% lower measured peak allocation). The iterative version also completes at $n = 5,000$ with a measured peak of 1,552 B. Because the original measurement is from a failed run, this is a comparison of recorded peak allocations, not two successful executions.
 ### F. Defend the Final Design
-- The objective was fully achieved: stack overflow is impossible, memory is $O(1)$, and execution is faster due to zero function-call overhead. The original memoised design is only preferable if the application must answer thousands of repeated queries for different values of $n$ within the valid recursion limit.
+- The objective was achieved for the tested sizes: the iterative design avoids recursive call-stack growth, uses $O(1)$ auxiliary space, and completes at $n = 5,000$. Its measured runtime and memory are reported in `Q7/output.txt`. The original memoised design is only preferable if the application must answer thousands of repeated queries for different values of $n$ within the valid recursion limit.
