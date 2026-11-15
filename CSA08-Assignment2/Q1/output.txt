@@ -1,0 +1,10 @@
+Household                            | Overlapping Ifs                  | if-elif-else                  
+---------------------------------------------------------------------------------------------------------
+H1 (<=100, RC=True)                  | Full Subsidy, Partial Subsidy    | Full Subsidy                  
+H2 (Boundary 100, RC=True)           | Full Subsidy, Partial Subsidy    | Full Subsidy                  
+H3 (Boundary 101, RC=True)           | Partial Subsidy                  | Partial Subsidy               
+H4 (Boundary 101, RC=False)          | No Subsidy                       | No Subsidy                    
+H5 (Boundary 200, RC=True)           | Partial Subsidy                  | Partial Subsidy               
+H6 (Boundary 200, RC=False, Sr=True) | No Subsidy                       | No Subsidy                    
+H7 (Boundary 201, Sr=True)           | Senior Citizen Special Subsidy   | Senior Citizen Special Subsidy
+H8 (Boundary 201, Sr=False)          | No Subsidy                       | No Subsidy                    

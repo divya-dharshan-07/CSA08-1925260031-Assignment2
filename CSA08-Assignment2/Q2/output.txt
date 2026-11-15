@@ -1,0 +1,17 @@
+--- Case 1: Blank entries + 3 wrong attempts ---
+[while] Attempt 1: Incorrect OTP.
+[while] Attempt 2: Incorrect OTP.
+[while] Attempt 3: Incorrect OTP.
+[while] Account locked for 30 minutes due to 3 failed attempts.
+
+[for] Iteration 1: Blank entry skipped (warning: range(3) still advances!).
+[for] Attempt 2: Incorrect OTP.
+[for] Attempt 3: Incorrect OTP.
+[for] Account locked for 30 minutes.
+
+--- Case 2: Changed Condition (2 extra attempts after security question) ---
+[Bonus] Security question answered correctly! Granting 2 extra attempts.
+Result: VERIFIED on attempt 5
+
+--- Case 3: Recursive OTP Check ---
+Recursive Result: VERIFIED

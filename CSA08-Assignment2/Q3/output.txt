@@ -1,0 +1,13 @@
+--- Complete the Code Verification ---
+tn 09 ab 1234   -> TN09AB1234  valid    | Receipt: TN 09 AB 1234
+KA-01-M-0007    -> KA01M0007   valid    | Receipt: KA 01 M 0007
+TN9AB1234       -> TN9AB1234   INVALID  | Receipt: N/A
+TN 22 1234 AB   -> TN221234AB  INVALID  | Receipt: N/A
+
+--- 6 Designed Test Cases ---
+Input: 'tn 09 ab 1234'    -> Normalised: TN09AB1234  -> Valid: True
+Input: 'KA-01-M-0007'     -> Normalised: KA01M0007   -> Valid: True
+Input: '  dl04caf9999  '  -> Normalised: DL04CAF9999 -> Valid: False
+Input: 'MH-12-Z-1001'     -> Normalised: MH12Z1001   -> Valid: True
+Input: 'TN9AB1234'        -> Normalised: TN9AB1234   -> Valid: False
+Input: 'TN 22 1234 AB'    -> Normalised: TN221234AB  -> Valid: False

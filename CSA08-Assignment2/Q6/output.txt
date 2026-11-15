@@ -1,0 +1,22 @@
+--- Hand Verification (n = 1 to 6) ---
+n=1: ways=1
+n=2: ways=2
+n=3: ways=3
+n=4: ways=5
+n=5: ways=8
+n=6: ways=13
+
+--- Complete the Code Output (n = 25) ---
+naive: 121393 calls = 242785
+memo : 121393 calls = 26
+
+--- Growth Investigation (n = 10, 20, 25, 30) ---
+n=10 | Naive Calls: 177      (0.00003s) | Memo Calls: 11   (0.000005s)
+n=20 | Naive Calls: 21891    (0.00442s) | Memo Calls: 21   (0.000011s)
+n=25 | Naive Calls: 242785   (0.05574s) | Memo Calls: 26   (0.000024s)
+n=30 | Naive Calls: 2692537  (0.69499s) | Memo Calls: 31   (0.000041s)
+
+--- Deployment Decision: Testing n = 1,000 ---
+Current sys.getrecursionlimit(): 1000
+ways_memo(1000) raised RecursionError: maximum recursion depth exceeded
+ways_iterative(1000) succeeded in 0.000113s | Number of digits: 209

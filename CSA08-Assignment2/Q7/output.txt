@@ -1,0 +1,8 @@
+Python Recursion Limit: 1000
+n        | Orig Status      | Orig Time (s)  | Orig Peak Mem  | Redesign Time (s) | Redesign Peak Mem
+--------------------------------------------------------------------------------------------------
+100      | OK               | 0.000432       | 53,856 B       | 0.000036          | 179 B
+500      | RecursionError   | N/A (Crash)    | 220,387 B      | 0.000241          | 304 B
+950      | RecursionError   | N/A (Crash)    | 166,169 B      | 0.000537          | 424 B
+1000     | RecursionError   | N/A (Crash)    | 166,087 B      | 0.000601          | 448 B
+5000     | RecursionError   | N/A (Crash)    | 166,087 B      | 0.003315          | 1,552 B

@@ -1,0 +1,11 @@
+--- Complete the Code Benchmark (200,000 items, 3 runs) ---
+Run 1: same text: True | length: 3048890 | += time: 0.0497 s | join time: 0.0158 s
+Run 2: same text: True | length: 3048890 | += time: 0.0599 s | join time: 0.0253 s
+Run 3: same text: True | length: 3048890 | += time: 0.0428 s | join time: 0.0200 s
+Average += time  : 0.0508 s
+Average join time: 0.0204 s
+
+--- Scaling Comparison across 1,000 | 10,000 | 200,000 lines ---
+N=1000    | +=: 0.00021s | join: 0.00002s | f-str+join: 0.00031s | StringIO: 0.00017s
+N=10000   | +=: 0.00157s | join: 0.00022s | f-str+join: 0.00304s | StringIO: 0.00174s
+N=200000  | +=: 0.03739s | join: 0.01221s | f-str+join: 0.08288s | StringIO: 0.04927s

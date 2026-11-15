@@ -1,0 +1,11 @@
+--- Complete the Code Output ---
+['Tea', 'Vada'] ['Tea', 'Vada']
+['Tea'] ['Vada']
+add_item_buggy.__defaults__ after calls: (['Tea', 'Vada'],)
+
+--- Testing 3 Independent Customers ---
+Customer 1 Order: ['Masala Dosa', 'Filter Coffee']
+Customer 2 Order: ['Idli Sambar']
+Customer 3 Order: ['Veg Biryani', 'Lemon Soda']
+Bill Summary -> Subtotal: Rs.80.0, GST: Rs.4.0, Total: Rs.84.0
+Scope Demo: [Campus Central Canteen] Order Counter #1 | Enclosing variable after nonlocal: Updated Counter
