@@ -1,9 +1,9 @@
 # CSA08 - Python Programming: Assignment 2 (CO2)
 
-- **Student Name:** <Your Name>
-- **Register Number:** <Your Register Number>
+- **Student Name:** Divya Dharshan
+- **Register Number:** 1925260031
 - **Course:** CSA08 – Python Programming
-- **Python Version:** Python 3.10.16
+- **Python Version:** Python 3.15.2 (verified on the development machine)
 - **External Libraries:** None (100% Python Standard Library: `time`, `sys`, `io`, `re`, `functools`, `tracemalloc`)
 
 ## Repository Structure
@@ -29,7 +29,7 @@ python Q7/q7_solution.py
 
 ## Summary of Results
 - **Q1:** Demonstrated that separate `if` statements without mutually exclusive bounds cause households at `<= 100` units with a ration card to receive two subsidies, whereas `if-elif-else` guarantees a single mutually exclusive outcome.
-- **Q2:** Implemented OTP verification using both `while` and `for` with `break`, `continue`, `pass`, and `loop-else`. Showed why `while` handles blank entries without wasting attempts and adapts cleanly to dynamic attempt extensions.
+- **Q2:** Implemented OTP verification using `while` and `for range(3)`, skipping blank entries without consuming attempts, handling exhausted input safely, and demonstrating `break`, `continue`, `pass`, loop `else`, two security-question bonus attempts, and recursion.
 - **Q3:** Built normaliser, slicer-based validator, and receipt formatter without regex; verified all 6 test inputs and compared $O(L)$ slicing against `re.fullmatch`.
 - **Q4:** Benchmarked `+=`, `"".join()`, f-string comprehension, and `io.StringIO` across 1,000, 10,000, and 200,000 lines, verifying $O(n)$ performance of `join()`.
 - **Q5:** Resolved mutable default argument bug (`order=[]` $\rightarrow$ `order=None`), inspected `__defaults__`, demonstrated LEGB scope (`local`, `nonlocal`, `global`), and validated 3 independent canteen orders.
